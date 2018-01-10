@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomerDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CustomerDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="CustomerDbModel.Customer" />
+    <EntitySet Name="PhoneNumbers" EntityType="CustomerDbModel.PhoneNumber" />
+    <AssociationSet Name="FK__PhoneNumb__Custo__2B3F6F97" Association="CustomerDbModel.FK__PhoneNumb__Custo__2B3F6F97">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Initials" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IDNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="PhoneNumbers" Relationship="CustomerDbModel.FK__PhoneNumb__Custo__2B3F6F97" FromRole="Customer" ToRole="PhoneNumber" />
+  </EntityType>
+  <EntityType Name="PhoneNumber">
+    <Key>
+      <PropertyRef Name="PhoneNumberID" />
+    </Key>
+    <Property Name="PhoneNumberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="PhoneCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Active" Type="Boolean" />
+    <NavigationProperty Name="Customer" Relationship="CustomerDbModel.FK__PhoneNumb__Custo__2B3F6F97" FromRole="PhoneNumber" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK__PhoneNumb__Custo__2B3F6F97">
+    <End Type="CustomerDbModel.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="CustomerDbModel.PhoneNumber" Role="PhoneNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="PhoneNumber">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,142 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div data-ng-controller="customerController" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <strong class="error">{{error}}</strong>
+            <p data-ng-hide="addMode"><a data-ng-click="toggleAdd()" href="javascript:;" class="btn btn-primary">Add New</a></p>
+            <form name="addCustomer" data-ng-show="addMode">
+                @*<div class="form-group">
+                    <label for="cid" class="col-sm-2 control-label">CustomerID :</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="cid" placeholder="please enter Customer ID " data-ng-model="newcustomer.CustomerID" required />
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label for="FirstName" class="col-sm-2 control-label">FirstName :</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="cname" placeholder="please enter your  first name" data-ng-model="newcustomer.FirstName" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="LastName" class="col-sm-2 control-label">LastName :</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lastName" placeholder="please enter your lastName" data-ng-model="newcustomer.LastName" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="IDNumber" class="col-sm-2 control-label">IDNumber :</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="IdNumber" placeholder="please enter your IDNumber" data-ng-model="newcustomer.IDNumber" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Initials" class="col-sm-2 control-label">Initials :</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="initials" placeholder="please enter your Initials" data-ng-model="newcustomer.Initials" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Active" class="col-sm-2 control-label">Active:</label>
+                    <div class="col-sm-2">
+                        <input type="checkbox" class="form-control" id="active" placeholder="please enter your Active" data-ng-model="newcustomer.Active" required />
+                    </div>
+                </div>
+                <br />
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" value="Add" data-ng-click="add()" data-ng-disabled="!addCustomer.$valid" class="btn btn-primary" />
+                        <input type="button" value="Cancel" data-ng-click="toggleAdd()" class="btn btn-primary" />
+                    </div>
+                </div>
+                <br />
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <br />
+            <br />
+        </div>
+    </div>
+        <div class="container">
+            <div class="row">
+                <div class="span12">
+                    <table class="table table-striped" data-ng-repeat="customer in customers">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Initials </th>
+                                <td>FirstName</td>
+                                <th>LastName</th>
+                                <th>IDNumber </th>
+                                <th>Active </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong data-ng-hide="customer.editMode">{{ customer.CustomerID }}</strong></td>
+                                <td>
+                                    <p data-ng-hide="customer.editMode">{{ customer.Initials }}</p>
+                                    <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.Initials" />
+                                </td>
+                                <td>
+                                    <p data-ng-hide="customer.editMode">{{ customer.FirstName }}</p>
+                                    <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.FirstName" />
+                                </td>
+                                <td>
+                                    <p data-ng-hide="customer.editMode">{{ customer.LastName }}</p>
+                                    <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.LastName" />
+                                </td>
+                                <td>
+                                    <p data-ng-hide="customer.editMode">{{ customer.IDNumber }}</p>
+                                    <input data-ng-show="customer.editMode" type="text" data-ng-model="customer.IDNumber" />
+                                </td>
+                                <td>
+                                    <p data-ng-hide="customer.editMode">{{ customer.Active }}</p>
+                                    <input data-ng-show="customer.editMode" type="checkbox" data-ng-model="customer.Active" />
+                                </td>
+                                <td><a href="#demo" class="btn btn-info" data-toggle="collapse">Phone List</a></td>
+                                <td>
+                                    <p data-ng-hide="customer.editMode"><a data-ng-click="toggleEdit(customer)" href="javascript:;">Edit</a> | <a data-ng-click="deletecustomer(customer)" href="javascript:;">Delete</a></p>
+                                    <p data-ng-show="customer.editMode"><a data-ng-click="save(customer)" href="javascript:;">Save</a> | <a data-ng-click="toggleEdit(customer)" href="javascript:;">Cancel</a></p>
+                                    
+                                </td>
+
+                            </tr>
+                            <tr>
+                                @*<td id="demo" class="collapse">
+                                    <table ng-repeat="u in customer.PhoneNumbers">
+                                        <tr>
+                                       
+                                            <td><strong>Phone Number :</strong> </td>
+                                            <td> {{u.PhoneNumber }}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td> <strong>Phone Code :</strong></td>
+                                            <td> {{u.PhoneCode}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Active :</strong>  </td>
+                                            <td> {{u.Active }}</td>
+                                        </tr>
+                                </td>*@
+           
+                    
+                    </table>
+                 
+
+                </div>
+            </div>
+        </div>
+
+<div id="mydiv" data-ng-show="loading">
+    <img src="~/Content/Images/loading.gif" />
+</div>
+
+</div>

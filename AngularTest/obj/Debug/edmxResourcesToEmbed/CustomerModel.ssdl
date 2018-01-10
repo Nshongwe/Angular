@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CustomerDbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CustomerDbModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="CustomerDbModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhoneNumbers" EntityType="CustomerDbModel.Store.PhoneNumbers" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__PhoneNumb__Custo__2B3F6F97" Association="CustomerDbModel.Store.FK__PhoneNumb__Custo__2B3F6F97">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="PhoneNumber" EntitySet="PhoneNumbers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Initials" Type="varchar" Nullable="true" MaxLength="40" />
+    <Property Name="FirstName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="LastName" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="IDNumber" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Active" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="PhoneNumbers">
+    <Key>
+      <PropertyRef Name="PhoneNumberID" />
+    </Key>
+    <Property Name="PhoneNumberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="true" />
+    <Property Name="PhoneCode" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="PhoneNumber1" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="Active" Type="bit" Nullable="true" />
+  </EntityType>
+  <Association Name="FK__PhoneNumb__Custo__2B3F6F97">
+    <End Role="Customer" Type="CustomerDbModel.Store.Customers" Multiplicity="0..1" />
+    <End Role="PhoneNumber" Type="CustomerDbModel.Store.PhoneNumbers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="PhoneNumber">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
